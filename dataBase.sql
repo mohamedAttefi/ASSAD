@@ -106,6 +106,10 @@ INSERT INTO reservations (idvisite, idutilisateur, nbpersonnes) VALUES
 (1, 1, 2),
 (2, 2, 1);
 
+SELECT r.id, v.titre, r.nbpersonnes, r.datereservation
+        FROM reservations r
+        JOIN visitesguidees v ON r.idvisite = v.id
+
 
 
 CREATE TABLE commentaires (
