@@ -128,3 +128,14 @@ select * from animaux INNER JOIN habitats ON id_habitat = habitats.id;
 
 select nom, texte, note from commentaires INNER JOIN utilisateurs ON idutilisateur = utilisateurs.id;
 
+CREATE TABLE admins (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    motpasse_hash VARCHAR(255) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    statut ENUM('actif','desactive') DEFAULT 'actif'
+);
+
+
+
