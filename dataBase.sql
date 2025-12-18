@@ -97,9 +97,12 @@ CREATE TABLE reservations (
     FOREIGN KEY (idvisite) REFERENCES visitesguidees(id),
     FOREIGN KEY (idutilisateur) REFERENCES utilisateurs(id)
 );
-
+SELECT id, nom, role, motpasse_hash FROM utilisateurs WHERE email = 'Ma3rt@gmail.com' AND motpasse_hash = '5ce378a8a37d950b3f4bad36c961f474';
 ALTER TABLE reservations
 MODIFY datereservation DATE;
+
+ALTER TABLE utilisateurs
+MODIFY role ENUM('visiteur','guide', 'admin') not null;
 
 
 INSERT INTO reservations (idvisite, idutilisateur, nbpersonnes) VALUES
@@ -142,4 +145,7 @@ CREATE TABLE admins (
 );
 
 
+SELECT id, nom FROM habitats ORDER BY nom
 
+
+SELECT id, nom, role, motpasse_hash FROM utilisateurs WHERE email = 'Mohamed@gmail.com' AND motpasse_hash = '202cb962ac59075b964b07152d234b70';
