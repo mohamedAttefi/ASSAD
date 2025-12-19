@@ -46,7 +46,7 @@ $result = $conn->query("
             </div>
         </div>
         
-        <form method="post" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form method="post" action="habitat_CRUD/actionHabitat.php" class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <input type="hidden" name="id" id="habitat-id">
             
             <!-- Colonne gauche -->
@@ -114,12 +114,12 @@ $result = $conn->query("
                 
                 <!-- Bouton d'action -->
                 <div class="pt-4">
-                    <button type="submit" 
+                    <button type="submit" name="ajouterHabitat" id="action"
                             class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition transform hover:-translate-y-1 shadow-md">
                         <i class="fas fa-save mr-2"></i>
                         <span id="submit-text">Créer l'habitat</span>
                     </button>
-                    <button type="button" 
+                    <button type="button"  
                             id="cancel-edit"
                             class="w-full mt-2 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 py-2 px-4 rounded-lg transition hidden">
                         Annuler la modification
@@ -386,7 +386,11 @@ function editHabitat(id, nom, climat, description, zone) {
     document.getElementById('form-title').textContent = 'Modifier l\'habitat';
     document.getElementById('form-subtitle').textContent = 'Modifiez les informations de l\'habitat';
     document.getElementById('submit-text').textContent = 'Mettre à jour';
-    
+
+
+    document.getElementById('action').name = 'modifierHabitat';
+    document.getElementById('action').value = id
+
     // Afficher le bouton annuler
     document.getElementById('cancel-edit').classList.remove('hidden');
     
