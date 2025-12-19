@@ -82,7 +82,7 @@ session_start();
                                 <a href="/ASSAD/admin/gestion_animaux.php" class="block px-4 py-2 hover:bg-green-50">
                                     <i class="fas fa-calendar-check mr-2 text-green-600"></i>Gestion des animaux
                                 </a>
-                                <a href="/ASSAD/admin/gestion_habitat.php" class="block px-4 py-2 hover:bg-green-50">
+                                <a href="/ASSAD/admin/gestion_habitats.php" class="block px-4 py-2 hover:bg-green-50">
                                     <i class="fas fa-calendar-check mr-2 text-green-600"></i>Gestion des habitats
                                 </a>
                                 <a href="/ASSAD/admin/gestion_utilisateurs.php" class="block px-4 py-2 hover:bg-green-50">
