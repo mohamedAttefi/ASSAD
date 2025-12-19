@@ -17,11 +17,16 @@ if (isset($_POST['add'])) {
 
     $password_hash = md5($password);
 
-    $sql = "INSERT INTO utilisateurs (nom, email, role, motpasse_hash)
+    if ($role == 'guide') {
+        $sql = "INSERT INTO utilisateurs (nom, email, role, motpasse_hash, statut)
+            VALUES ('$nom', '$email', '$role', '$password_hash', 'desapprouvee')";
+    } else {
+        $sql = "INSERT INTO utilisateurs (nom, email, role, motpasse_hash)
             VALUES ('$nom', '$email', '$role', '$password_hash')";
+    }
 
     $result = $conn->query($sql);
-    
+
 
     header("Location: login.php");
     exit;
