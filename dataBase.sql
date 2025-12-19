@@ -97,7 +97,9 @@ CREATE TABLE reservations (
     FOREIGN KEY (idvisite) REFERENCES visitesguidees(id),
     FOREIGN KEY (idutilisateur) REFERENCES utilisateurs(id)
 );
-SELECT id, nom, role, motpasse_hash FROM utilisateurs WHERE email = 'Ma3rt@gmail.com' AND motpasse_hash = '5ce378a8a37d950b3f4bad36c961f474';
+
+SELECT id, nom, role FROM utilisateurs WHERE email = 'Xiwza@gmail.com' AND motpasse_hash = '347b0c93d8ade7a99570689d59d86466'
+
 ALTER TABLE reservations
 MODIFY datereservation DATE;
 
@@ -149,3 +151,31 @@ SELECT id, nom FROM habitats ORDER BY nom
 
 
 SELECT id, nom, role, motpasse_hash FROM utilisateurs WHERE email = 'Mohamed@gmail.com' AND motpasse_hash = '202cb962ac59075b964b07152d234b70';
+
+SELECT u.*, 
+               COUNT(DISTINCT r.id) as nb_reservations,
+               COUNT(DISTINCT c.id) as nb_commentaires,
+               MAX(r.datereservation) as derniere_reservation
+        FROM utilisateurs u
+        LEFT JOIN reservations r ON u.id = r.idutilisateur
+        LEFT JOIN commentaires c ON u.id = c.idutilisateur
+        GROUP BY u.id
+        
+
+
+SELECT 
+    COUNT(*) AS total,
+    COUNT(CASE WHEN role = 'visiteur' THEN 1 END) AS visiteurs,
+    COUNT(CASE WHEN role = 'guide' THEN 1 END) AS guides
+FROM utilisateurs;
+
+
+select * from animaux, habitats limit 4;
+
+
+delete from animaux where id = 10;
+
+
+select * from visitesguidees inner join utilisateurs on visitesguidees.id_guide =  utilisateurs.id;
+
+SELECT id, nom, role FROM utilisateurs WHERE email = 'Xihd@gmail.com' AND motpasse_hash = 'ab86a1e1ef70dff97959067b723c5c24';
