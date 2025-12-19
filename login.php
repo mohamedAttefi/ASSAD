@@ -1,31 +1,37 @@
 <?php
+session_start();
 include 'includes/db.php';
-
+print_r($_SESSION);
 if (isset($_POST['login'])) {
 
     $email = $_POST['email'];
     $password = md5($_POST['password']);
 
-    $sql = "SELECT id, nom, role
+    $sql = "SELECT id, nom, role,statut
             FROM utilisateurs
             WHERE email = '$email' AND motpasse_hash = '$password'";
     $result = mysqli_query($conn, $sql);
+    echo $sql;
+
+    echo $result->num_rows;
 
     
-echo $sql;
-    if ($result->num_rows === 1) {
+    if ($result->num_rows == 1) {
         $user = $result->fetch_assoc();
 
         $_SESSION['user_id']  = $user['id'];
         $_SESSION['user_nom'] = $user['nom'];
         $_SESSION['role']     = $user['role'];
-        echo $_SESSION['role'] ,$_SESSION['user_nom'],$_SESSION['user_id'];
+        $_SESSION['statut']     = $user['statut'];
 
-        if ($user['role'] === 'guide') {
+        if ($user['role'] === 'guide' && $user['statut'] == 'en_attente' || $user['statut'] == 'desapprouvee') {
+            header("Location: pendingGuide.php");
+            echo $user['statut'];
+        }elseif ($user['role'] === 'guide' && $user['statut'] == 'approuvee') {
             header("Location: dashboardGuide.php");
         } elseif ($user['role'] === 'admin') {
             header("Location: admin/dashboard.php");
-        } else {
+        } elseif($user['role'] === 'visiteur' && $user['statut'] == 'actif'){
             header("Location: dashboardVisiteur.php");
         }
         exit;
@@ -35,12 +41,6 @@ echo $sql;
 }
 include 'includes/header.php';
 ?>
-
-
-
-
-
-
 <!-- Hero Section -->
 <section class="py-8 bg-gradient-to-r from-green-800 to-emerald-900 text-white rounded-lg mb-8">
     <div class="max-w-4xl mx-auto px-4 text-center">
